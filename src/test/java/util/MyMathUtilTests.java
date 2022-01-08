@@ -2,36 +2,17 @@ package util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyMathUtilTests {
-
-    @Test
-    @DisplayName("n자리 이하 수라면 10^n로 나누면 몫이 0이야")
-    void test3(){
-        assertThat(MyMathUtil.checkDigitUpper(0,3)).isTrue();
-        assertThat(MyMathUtil.checkDigitUpper(1,3)).isTrue();
-        assertThat(MyMathUtil.checkDigitUpper(111,3)).isTrue();
-
-        assertThat(MyMathUtil.checkDigitUpper(1111,3)).isFalse();
-    }
-
-    @Test
-    @DisplayName("n자리 이상 수라면 10^(n-1)로 나누면 몫이 0이 아니야")
-    void test4(){
-        assertThat(MyMathUtil.checkDigitLower(11,3)).isFalse();
-
-        assertThat(MyMathUtil.checkDigitLower(111,3)).isTrue();
-        assertThat(MyMathUtil.checkDigitLower(1111,3)).isTrue();
-    }
-
-    @Test
-    @DisplayName("위 두개를 합침")
-    void test5(){
-        assertThat(MyMathUtil.checkDigit(11,3)).isFalse();
-        assertThat(MyMathUtil.checkDigit(1111,3)).isFalse();
-
-        assertThat(MyMathUtil.checkDigit(111,3)).isTrue();
+    @ParameterizedTest
+    @CsvSource(value = {"11:false","111:true","1111:false"},delimiter = ':')
+    @DisplayName("파라미터로 전달된 값이, 파라미터로 전달된 자릿수 인지 판단")
+    void test5(int input,boolean output){
+        assertThat(MyMathUtil.checkDigit(input,3)).isEqualTo(output);
+        //3이라는 값을 그대로 사용한 게 마음에 들지 않는다.
     }
 }
