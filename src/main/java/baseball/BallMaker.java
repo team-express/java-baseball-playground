@@ -21,4 +21,10 @@ public class BallMaker {
     public boolean checkNum(int i) {
         return MyMathUtil.checkDigit(i,DIGIT_NUM);
     }
+
+    //숫자를 모두 체크하기 전에 숫자를 나누는 것 부터 해야겠다
+    //String.charAt - parse방식은 익숙하니
+    public boolean checkRange(int i) {
+        return true;
+    }
 }
