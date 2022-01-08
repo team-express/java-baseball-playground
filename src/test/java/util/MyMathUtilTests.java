@@ -13,6 +13,5 @@ public class MyMathUtilTests {
     @DisplayName("파라미터로 전달된 값이, 파라미터로 전달된 자릿수 인지 판단")
     void test5(int input,boolean output){
         assertThat(MyMathUtil.checkDigit(input,3)).isEqualTo(output);
-        //3이라는 값을 그대로 사용한 게 마음에 들지 않는다.
     }
 }
