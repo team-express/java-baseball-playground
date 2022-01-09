@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BallMaker {
+    //이 클래스의 싱글톤화에 대한 고찰(enum과 static 안되는 이유 + 내부클래스)
+    //야구 게임은 무조건 3개의수(삼진아웃) 서로다른 수(게임룰이 그렇게 임의로 짜여져 있다) 고찰.
+
     private final int MIN_NUM;
     private final int MAX_NUM;
     private final int DIGIT_NUM;
@@ -19,10 +22,10 @@ public class BallMaker {
     public boolean checkDuplicated(int num) {
         List<Integer> dividedNums = MyMathUtil.divide(num);
         List<Integer> dividedNumsTmp = new ArrayList<>();
+        //꼭 공간낭비를 해야했을까, 일단 두겠다
 
         boolean checkDuplicated = true;
 
-        
         for(Integer dividedNum : dividedNums){
             checkDuplicated = checkDuplicatedOfOneNum(dividedNum,dividedNumsTmp);
             dividedNumsTmp.add(dividedNum);
