@@ -40,31 +40,28 @@ public class BallMakerTests {
         assertThat(ballMaker.checkNum(input)).isEqualTo(output);
     }
 
-    @Test
-    @DisplayName("한 수가 리스트에 포함되나")
-    void testDuplicatedOfOneNum(){
+    @ParameterizedTest
+    @CsvSource(value = {"1:false","4:true"},delimiter = ':')
+    @DisplayName("한 수가 리스트에 포함되지 않아야 함")
+    void testDuplicatedOfOneNum(int input,boolean output){
         List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
 
-        assertThat(ballMaker.checkDuplicatedOfOneNum(1,list)).isFalse();
-        assertThat(ballMaker.checkDuplicatedOfOneNum(4,list)).isTrue();
+        if(!output) list.add(input);
+
+        assertThat(ballMaker.checkDuplicatedOfOneNum(input,list)).isEqualTo(output);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"123:true","121:false"},delimiter = ':')
     @DisplayName("사용자가 입력한 수가 중복되지 않는가")
-    void test3(){
-        assertThat(ballMaker.checkDuplicated(123)).isTrue();
-        assertThat(ballMaker.checkDuplicated(121)).isFalse();
+    void test3(int input, boolean output){
+        assertThat(ballMaker.checkDuplicated(input)).isEqualTo(output);
     }
 
-    //그런데 자꾸 하나씩 커밋 && 리팩토링 안하고 한번에 하려하네...
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1234:false","121:false","123:true"},delimiter = ':')
     @DisplayName("사용자가 생성한 숫자가 이 모든 조건을 만족하는가")
-    void testCheck(){
-        assertThat(ballMaker.check(1234)).isFalse();
-        assertThat(ballMaker.check(121)).isFalse();
-        assertThat(ballMaker.check(123)).isTrue();
+    void testCheck(int input, boolean output){
+        assertThat(ballMaker.check(input)).isEqualTo(output);
     }
 }
