@@ -17,38 +17,40 @@ public class BallMaker {
     }
 
     public boolean checkDuplicated(int num) {
-        List<Integer> list = MyMathUtil.divide(num);
-        List<Integer> tmp = new ArrayList<>();
+        List<Integer> dividedNums = MyMathUtil.divide(num);
+        List<Integer> dividedNumsTmp = new ArrayList<>();
 
-        boolean b = true;
+        boolean checkDuplicated = true;
 
-        for(Integer integer : list){
-            b = checkDuplicatedOfOneNum(integer,tmp);
-            tmp.add(integer);
+        
+        for(Integer dividedNum : dividedNums){
+            checkDuplicated = checkDuplicatedOfOneNum(dividedNum,dividedNumsTmp);
+            dividedNumsTmp.add(dividedNum);
         }
-        return b;
+        return checkDuplicated;
     }
 
     public boolean checkDuplicatedOfOneNum(int num, List<Integer> list) {
         return !list.contains(num);
     }
 
-    public boolean checkRangeOfOneNum(int i) {
-        return i>=MIN_NUM && i<=MAX_NUM;
+    public boolean checkRangeOfOneNum(int num) {
+        return num>=MIN_NUM && num<=MAX_NUM;
     }
 
-    public boolean checkNum(int i) {
-        return MyMathUtil.checkDigit(i,DIGIT_NUM);
+    public boolean checkNum(int num) {
+        return MyMathUtil.checkDigit(num,DIGIT_NUM);
     }
 
     public boolean checkRange(int num) {
-        List<Integer> list = MyMathUtil.divide(num);
-        boolean b=true;
+        List<Integer> dividedNums = MyMathUtil.divide(num);
+        boolean checkRange=true;
 
-        for(Integer integer : list)
-            b=checkRangeOfOneNum(integer);
+        //여기와 dupli부분의 이런 방법이 마음에 들지 않지만, 리팩토링하더라도 input/output에는 영향을 끼치지 않으므로 일단 두겠다.
+        for(Integer dividedNum : dividedNums)
+            checkRange=checkRangeOfOneNum(dividedNum);
 
-        return b;
+        return checkRange;
     }
 
     public boolean check(int num) {

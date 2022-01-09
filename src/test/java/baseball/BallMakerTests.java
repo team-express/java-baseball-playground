@@ -22,21 +22,21 @@ public class BallMakerTests {
     @ParameterizedTest
     @CsvSource(value = {"0:false","1:true","9:true","10:false"},delimiter = ':')
     @DisplayName("한 숫자가 1~9사이의 숫자를 입력하였는지 체크")
-    void test(int input, boolean output){
+    void testCheckRangeOfOneNum(int input, boolean output){
         assertThat(ballMaker.checkRangeOfOneNum(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"012:false","123:true"},delimiter = ':')
     @DisplayName("사용자가 입력한 3숫자 모두 1~9조건을 만족하는지")
-    void test0(int input, boolean output){
+    void testCheckRange(int input, boolean output){
         assertThat(ballMaker.checkRange(input)).isEqualTo(output);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"11:false","111:true","1111:false"},delimiter = ':')
     @DisplayName("사용자가 3자리수를 입력하였는지")
-    void test2(int input,boolean output){
+    void testCheckNum(int input,boolean output){
         assertThat(ballMaker.checkNum(input)).isEqualTo(output);
     }
 
@@ -54,7 +54,7 @@ public class BallMakerTests {
     @ParameterizedTest
     @CsvSource(value = {"123:true","121:false"},delimiter = ':')
     @DisplayName("사용자가 입력한 수가 중복되지 않는가")
-    void test3(int input, boolean output){
+    void testCheckDuplicated(int input, boolean output){
         assertThat(ballMaker.checkDuplicated(input)).isEqualTo(output);
     }
 
