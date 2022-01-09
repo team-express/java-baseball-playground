@@ -22,7 +22,7 @@ public class MyMathUtil {
 
         int share = num*DECIMAL_NUM;
         while((share/=DECIMAL_NUM)!=ZERO){
-            list.add(ZERO,(share)%DECIMAL_NUM);
+            list.add(ZERO,share%DECIMAL_NUM);
         }
 
         return list;

@@ -19,7 +19,7 @@ public class BallMaker {
         this.DIGIT_NUM=DIGIT_NUM;
     }
 
-    public boolean checkDuplicated(int num) {
+    private boolean checkDuplicated(int num) {
         List<Integer> dividedNums = MyMathUtil.divide(num);
         List<Integer> dividedNumsTmp = new ArrayList<>();
         //꼭 공간낭비를 해야했을까, 일단 두겠다
@@ -33,7 +33,7 @@ public class BallMaker {
         return checkDuplicated;
     }
 
-    public boolean checkDuplicatedOfOneNum(int num, List<Integer> list) {
+    private boolean checkDuplicatedOfOneNum(int num, List<Integer> list) {
         return list.contains(num);
     }
 
@@ -41,7 +41,7 @@ public class BallMaker {
         return num>=MIN_NUM && num<=MAX_NUM;
     }
 
-    public boolean checkNum(int num) {
+    boolean checkNum(int num) {
         return MyMathUtil.checkDigit(num,DIGIT_NUM);
     }
 

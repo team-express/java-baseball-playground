@@ -7,16 +7,23 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import util.MyMathUtil;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 public class BallMakerTests {
     BallMaker ballMaker;
+    Class clazz;
+    Class[] paramTypes;
+    Method method;
 
     @BeforeEach
     void setUp(){
         ballMaker = new BallMaker(1,9,3);
+        clazz = BallMaker.class;
+
     }
 
     @ParameterizedTest
@@ -48,14 +55,31 @@ public class BallMakerTests {
 
         if(output) list.add(input);
 
-        assertThat(ballMaker.checkDuplicatedOfOneNum(input,list)).isEqualTo(output);
+        try {
+            paramTypes=new Class[]{int.class,List.class};
+            method = clazz.getDeclaredMethod("checkDuplicatedOfOneNum",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input,list)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @ParameterizedTest
     @CsvSource(value = {"123:false","121:true"},delimiter = ':')
     @DisplayName("사용자가 입력한 수가 중복되는가")
     void testCheckDuplicated(int input, boolean output){
-        assertThat(ballMaker.checkDuplicated(input)).isEqualTo(output);
+
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("checkDuplicated",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @ParameterizedTest
