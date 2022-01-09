@@ -24,7 +24,7 @@ public class BallMaker {
         List<Integer> dividedNumsTmp = new ArrayList<>();
         //꼭 공간낭비를 해야했을까, 일단 두겠다
 
-        boolean checkDuplicated = true;
+        boolean checkDuplicated = false;
 
         for(Integer dividedNum : dividedNums){
             checkDuplicated = checkDuplicatedOfOneNum(dividedNum,dividedNumsTmp);
@@ -34,7 +34,7 @@ public class BallMaker {
     }
 
     public boolean checkDuplicatedOfOneNum(int num, List<Integer> list) {
-        return !list.contains(num);
+        return list.contains(num);
     }
 
     public boolean checkRangeOfOneNum(int num) {
@@ -57,6 +57,6 @@ public class BallMaker {
     }
 
     public boolean check(int num) {
-        return checkRange(num)&&checkDuplicated(num)&&checkNum(num);
+        return checkRange(num)&&!checkDuplicated(num)&&checkNum(num);
     }
 }

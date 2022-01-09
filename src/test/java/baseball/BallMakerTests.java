@@ -41,19 +41,19 @@ public class BallMakerTests {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:false","4:true"},delimiter = ':')
-    @DisplayName("한 수가 리스트에 포함되지 않아야 함")
+    @CsvSource(value = {"1:true","4:false"},delimiter = ':')
+    @DisplayName("한 수가 리스트에 포함되어 있어야 함")
     void testDuplicatedOfOneNum(int input,boolean output){
         List<Integer> list = new ArrayList<>();
 
-        if(!output) list.add(input);
+        if(output) list.add(input);
 
         assertThat(ballMaker.checkDuplicatedOfOneNum(input,list)).isEqualTo(output);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"123:true","121:false"},delimiter = ':')
-    @DisplayName("사용자가 입력한 수가 중복되지 않는가")
+    @CsvSource(value = {"123:false","121:true"},delimiter = ':')
+    @DisplayName("사용자가 입력한 수가 중복되는가")
     void testCheckDuplicated(int input, boolean output){
         assertThat(ballMaker.checkDuplicated(input)).isEqualTo(output);
     }
