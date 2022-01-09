@@ -52,6 +52,6 @@ public class BallMaker {
     }
 
     public boolean check(int num) {
-        return checkDuplicated(num)&&checkNum(num)&&checkRange(num);
+        return checkRange(num)&&checkDuplicated(num)&&checkNum(num);
     }
 }
