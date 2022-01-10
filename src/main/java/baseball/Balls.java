@@ -17,6 +17,9 @@ public class Balls {
         this.list = balls;
         setPositions();
     }
+    public int getSize(){
+        return this.list.size();
+    }
 
     private void setPositions(){
         for(int i=0;i<list.size();i++){

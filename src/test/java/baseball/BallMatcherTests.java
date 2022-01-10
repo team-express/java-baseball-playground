@@ -21,29 +21,34 @@ public class BallMatcherTests {
     Balls userBalls,computerBalls;
 
     BallMatcher ballMatcher;
+    BallStatesInfo ballStatesInfo;
 
     @BeforeEach
     void setUp(){
         ballMaker = new BallMaker(1,9,3);
         ballMatcher = new BallMatcher();
+        ballStatesInfo = new BallStatesInfo();
+
         clazz = BallMatcher.class;
     }
 
     @Test
-    @DisplayName("하나씩 숫자,위치로 구종 반환")
-    void testGetBallState(){
+    @DisplayName("하나하나 비교한 구종을 바로 올린다")
+    void testCountBallState(){
 
         userBalls = ballMaker.createUserBalls(142);
         computerBalls = ballMaker.createUserBalls(123);
 
         try {
-            paramTypes=new Class[]{Ball.class,Ball.class};
-            method = clazz.getDeclaredMethod("getBallState",paramTypes);
+            paramTypes=new Class[]{Ball.class,Ball.class, BallStatesInfo.class};
+            method = clazz.getDeclaredMethod("countBallState",paramTypes);
             method.setAccessible(true);
 
-            assertThat(method.invoke(ballMatcher,userBalls.get(0),computerBalls.get(0))).isEqualTo(BallState.STRIKE);
-            assertThat(method.invoke(ballMatcher,userBalls.get(0),computerBalls.get(1))).isEqualTo(BallState.NOTHING);
-            assertThat(method.invoke(ballMatcher,userBalls.get(2),computerBalls.get(1))).isEqualTo(BallState.BALL);
+            method.invoke(ballMatcher,userBalls.get(0),computerBalls.get(0),ballStatesInfo);
+            method.invoke(ballMatcher,userBalls.get(0),computerBalls.get(1),ballStatesInfo);
+            method.invoke(ballMatcher,userBalls.get(2),computerBalls.get(1),ballStatesInfo);
+
+            assertThat(ballStatesInfo.toString()).isEqualTo("1볼 1스트라이크 ");
 
         }catch (Exception e){
             e.printStackTrace();
@@ -51,8 +56,40 @@ public class BallMatcherTests {
     }
 
     @Test
-    @DisplayName("각각의 전부 볼 구종 위치 구하여 BallStatesInfo 반환")
+    @DisplayName("사용자 볼 하나로 컴퓨터 볼들 비교하여 구종을 올린다")
+    void testMakeBallStatesInfoOfOneUserBall(){
+        userBalls = ballMaker.createUserBalls(142);
+        computerBalls = ballMaker.createUserBalls(123);
+        try {
+            paramTypes=new Class[]{Ball.class,Balls.class, BallStatesInfo.class};
+            method = clazz.getDeclaredMethod("makeBallStatesInfoOfOneUserBall",paramTypes);
+            method.setAccessible(true);
+
+            method.invoke(ballMatcher,userBalls.get(0),computerBalls,ballStatesInfo);
+            method.invoke(ballMatcher,userBalls.get(1),computerBalls,ballStatesInfo);
+            method.invoke(ballMatcher,userBalls.get(2),computerBalls,ballStatesInfo);
+
+            assertThat(ballStatesInfo.toString()).isEqualTo("1볼 1스트라이크 ");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @DisplayName("전부 비교, BallStatesInfo 반환")
     void tesGetBallStatesInfo(){
-        
+        userBalls = ballMaker.createUserBalls(142);
+        computerBalls = ballMaker.createUserBalls(357);
+        assertThat(ballMatcher.getBallStatesInfo(userBalls,computerBalls).toString()).isEqualTo("Nothing");
+
+        userBalls = ballMaker.createUserBalls(124);
+        computerBalls = ballMaker.createUserBalls(241);
+        assertThat(ballMatcher.getBallStatesInfo(userBalls,computerBalls).toString()).isEqualTo("3볼 ");
+
+        userBalls = ballMaker.createUserBalls(142);
+        computerBalls = ballMaker.createUserBalls(142);
+        assertThat(ballMatcher.getBallStatesInfo(userBalls,computerBalls).toString()).isEqualTo("3스트라이크 ");
+
     }
 }

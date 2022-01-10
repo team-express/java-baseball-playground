@@ -5,12 +5,12 @@ public class BallStatesInfo {
     private int ballCnt;
     private int strikeCnt;
 
-    //필드 ball, strike를 올린다
-    public void plusBallCount(){
-        this.ballCnt++;
-    }
-    public void plusStrikeCount(){
-        this.strikeCnt++;
+    //구종에 따라 올린다
+    public void countUp(BallState ballState){
+        if(ballState.equals(BallState.BALL))
+            this.ballCnt++;
+        if(ballState.equals(BallState.STRIKE))
+            this.strikeCnt++;
     }
 
     //명세 반환
