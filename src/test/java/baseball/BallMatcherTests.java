@@ -49,4 +49,10 @@ public class BallMatcherTests {
             e.printStackTrace();
         }
     }
+
+    @Test
+    @DisplayName("각각의 전부 볼 구종 위치 구하여 BallStatesInfo 반환")
+    void tesGetBallStatesInfo(){
+        
+    }
 }

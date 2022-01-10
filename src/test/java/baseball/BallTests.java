@@ -21,4 +21,18 @@ public class BallTests {
     void testEquals(int input1,int input2,boolean output){
         assertThat(new Ball(input1).equals(new Ball(input2))).isEqualTo(output);
     }
+
+    @Test
+    @DisplayName("두 볼 equals 테스트2")
+    void testEquals2(){
+        Ball ball1 = new Ball(1);
+        Ball ball2 = new Ball(1);
+
+        assertThat(ball1.equals(ball2)).isTrue();
+
+        ball1.setPosition(2);
+
+        assertThat(ball1.equals(ball2)).isFalse();
+    }
+
 }

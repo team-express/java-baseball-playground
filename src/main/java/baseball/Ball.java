@@ -16,7 +16,7 @@ public class Ball {
     @Override
     public boolean equals(Object object){
         if(object instanceof Ball)
-            return ((Ball) object).getNum()==this.getNum();
+            return ((Ball) object).getNum()==this.getNum() && ((Ball) object).getPosition()==this.getPosition();
         return false;
     }
     @Override
