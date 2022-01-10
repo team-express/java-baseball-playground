@@ -142,4 +142,5 @@ public class BallMakerTests {
     void testCreateUserBalls(int input,boolean output){
         assertThat(ballMaker.createUserBalls(input)!=null).isEqualTo(output);
     }
+
 }

@@ -78,4 +78,26 @@ public class BallMaker {
     private Ball createBall(int num) {
         return new Ball(num);
     }
+
+    public Balls createComputerBalls(){
+        List<Integer> list = new ArrayList<>();
+        List<Ball> balls = new ArrayList<>();
+
+        while(balls.size()<3) {
+            Ball ball = createComputerBall(list);
+            balls.add(ball);
+            list.add(ball.getNum());
+        }
+        return new Balls(balls);
+    }
+
+    private Ball createComputerBall(List<Integer> list){
+        int num = (int) (Math.random() * 9) + 1;
+
+        while(checkDuplicatedOfOneNum(num, list)){
+            num = (int) (Math.random() * 9) + 1;
+        }
+
+        return new Ball(num);
+    }
 }
