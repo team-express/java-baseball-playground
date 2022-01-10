@@ -23,28 +23,52 @@ public class BallMakerTests {
     void setUp(){
         ballMaker = new BallMaker(1,9,3);
         clazz = BallMaker.class;
-
     }
 
     @ParameterizedTest
     @CsvSource(value = {"0:false","1:true","9:true","10:false"},delimiter = ':')
     @DisplayName("한 숫자가 1~9사이의 숫자를 입력하였는지 체크")
     void testCheckRangeOfOneNum(int input, boolean output){
-        assertThat(ballMaker.checkRangeOfOneNum(input)).isEqualTo(output);
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("checkRangeOfOneNum",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @ParameterizedTest
     @CsvSource(value = {"012:false","123:true"},delimiter = ':')
     @DisplayName("사용자가 입력한 3숫자 모두 1~9조건을 만족하는지")
     void testCheckRange(int input, boolean output){
-        assertThat(ballMaker.checkRange(input)).isEqualTo(output);
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("checkRange",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @ParameterizedTest
     @CsvSource(value = {"11:false","111:true","1111:false"},delimiter = ':')
     @DisplayName("사용자가 3자리수를 입력하였는지")
     void testCheckNum(int input,boolean output){
-        assertThat(ballMaker.checkNum(input)).isEqualTo(output);
+
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("checkNum",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @ParameterizedTest
@@ -86,6 +110,14 @@ public class BallMakerTests {
     @CsvSource(value = {"1234:false","121:false","123:true"},delimiter = ':')
     @DisplayName("사용자가 생성한 숫자가 이 모든 조건을 만족하는가")
     void testCheck(int input, boolean output){
-        assertThat(ballMaker.check(input)).isEqualTo(output);
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("check",paramTypes);
+            method.setAccessible(true);
+            assertThat(method.invoke(ballMaker,input)).isEqualTo(output);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

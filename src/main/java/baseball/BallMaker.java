@@ -8,6 +8,7 @@ import java.util.List;
 public class BallMaker {
     //이 클래스의 싱글톤화에 대한 고찰(enum과 static 안되는 이유 + 내부클래스)
     //야구 게임은 무조건 3개의수(삼진아웃) 서로다른 수(게임룰이 그렇게 임의로 짜여져 있다) 고찰.
+    //maker와 checker로 나눌까
 
     private final int MIN_NUM;
     private final int MAX_NUM;
@@ -18,6 +19,7 @@ public class BallMaker {
         this.MAX_NUM=MAX_NUM;
         this.DIGIT_NUM=DIGIT_NUM;
     }
+
 
     private boolean checkDuplicated(int num) {
         List<Integer> dividedNums = MyMathUtil.divide(num);
@@ -37,15 +39,15 @@ public class BallMaker {
         return list.contains(num);
     }
 
-    public boolean checkRangeOfOneNum(int num) {
+    private boolean checkRangeOfOneNum(int num) {
         return num>=MIN_NUM && num<=MAX_NUM;
     }
 
-    boolean checkNum(int num) {
+    private boolean checkNum(int num) {
         return MyMathUtil.checkDigit(num,DIGIT_NUM);
     }
 
-    public boolean checkRange(int num) {
+    private boolean checkRange(int num) {
         List<Integer> dividedNums = MyMathUtil.divide(num);
         boolean checkRange=true;
 
@@ -56,7 +58,7 @@ public class BallMaker {
         return checkRange;
     }
 
-    public boolean check(int num) {
+    private boolean check(int num) {
         return checkRange(num)&&!checkDuplicated(num)&&checkNum(num);
     }
 }
