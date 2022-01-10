@@ -16,4 +16,8 @@ public class Ball {
             return ((Ball) object).getNum()==this.getNum();
         return false;
     }
+    @Override
+    public  String toString(){
+        return num+"";
+    }
 }

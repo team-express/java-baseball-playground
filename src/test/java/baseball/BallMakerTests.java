@@ -15,6 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 public class BallMakerTests {
     BallMaker ballMaker;
+
     Class clazz;
     Class[] paramTypes;
     Method method;
@@ -41,7 +42,7 @@ public class BallMakerTests {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"012:false","123:true"},delimiter = ':')
+    @CsvSource(value = {"012:false","123:true","230:false"},delimiter = ':')
     @DisplayName("사용자가 입력한 3숫자 모두 1~9조건을 만족하는지")
     void testCheckRange(int input, boolean output){
         try {
@@ -119,5 +120,26 @@ public class BallMakerTests {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Test
+    @DisplayName("한 숫자 공 생성")
+    void createBall(){
+        try {
+            paramTypes=new Class[]{int.class};
+            method = clazz.getDeclaredMethod("createBall",paramTypes);
+            method.setAccessible(true);
+            assertThat(((Ball)method.invoke(ballMaker,3)).getNum()).isEqualTo(3);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @ParameterizedTest
+    @DisplayName("사용자 공 생성")
+    @CsvSource(value = {"211:false","1234:false","346:true"},delimiter = ':')
+    void testCreateUserBalls(int input,boolean output){
+        assertThat(ballMaker.createUserBalls(input)!=null).isEqualTo(output);
     }
 }

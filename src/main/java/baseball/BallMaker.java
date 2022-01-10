@@ -4,6 +4,7 @@ import util.MyMathUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BallMaker {
     //이 클래스의 싱글톤화에 대한 고찰(enum과 static 안되는 이유 + 내부클래스)
@@ -20,15 +21,14 @@ public class BallMaker {
         this.DIGIT_NUM=DIGIT_NUM;
     }
 
-
     private boolean checkDuplicated(int num) {
         List<Integer> dividedNums = MyMathUtil.divide(num);
         List<Integer> dividedNumsTmp = new ArrayList<>();
-        //꼭 공간낭비를 해야했을까, 일단 두겠다
 
         boolean checkDuplicated = false;
 
-        for(Integer dividedNum : dividedNums){
+        for(int i=0;i<dividedNums.size() && !checkDuplicated;i++){
+            int dividedNum = dividedNums.get(i);
             checkDuplicated = checkDuplicatedOfOneNum(dividedNum,dividedNumsTmp);
             dividedNumsTmp.add(dividedNum);
         }
@@ -51,14 +51,31 @@ public class BallMaker {
         List<Integer> dividedNums = MyMathUtil.divide(num);
         boolean checkRange=true;
 
-        //여기와 dupli부분의 이런 방법이 마음에 들지 않지만, 리팩토링하더라도 input/output에는 영향을 끼치지 않으므로 일단 두겠다.
-        for(Integer dividedNum : dividedNums)
-            checkRange=checkRangeOfOneNum(dividedNum);
+        for(int i=0;i<dividedNums.size() && checkRange;i++){
+            checkRange = checkRangeOfOneNum(dividedNums.get(i));
+        }
 
         return checkRange;
     }
 
     private boolean check(int num) {
-        return checkRange(num)&&!checkDuplicated(num)&&checkNum(num);
+        return checkRange(num)&&(!checkDuplicated(num))&&checkNum(num);
+    }
+
+    public Balls createUserBalls(int num) {
+
+        if(!check(num))
+            return null;
+
+        List<Integer> dividedNums = MyMathUtil.divide(num);
+        List<Ball> balls = new ArrayList<>();
+        for (Integer dividedNum : dividedNums)
+            balls.add(createBall(dividedNum));
+
+        return new Balls(balls);
+    }
+
+    private Ball createBall(int num) {
+        return new Ball(num);
     }
 }
