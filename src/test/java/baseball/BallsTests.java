@@ -18,4 +18,9 @@ public class BallsTests {
     void testGet(int index, int input, boolean output){
         assertThat(balls.get(index).getNum()==input).isEqualTo(output);
     }
+
+    @Test
+    void test(){
+        System.out.println(balls);
+    }
 }

@@ -11,9 +11,17 @@ public class Balls {
         list.add(ball1);
         list.add(ball2);
         list.add(ball3);
+        setPositions();
     }
     public Balls(List<Ball> balls){
         this.list = balls;
+        setPositions();
+    }
+
+    private void setPositions(){
+        for(int i=0;i<list.size();i++){
+            list.get(i).setPosition(i);
+        }
     }
 
     @Override

@@ -1,10 +1,13 @@
 package baseball;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Getter
 public class Ball {
     private int num;
+    @Setter private int position;
 
     public Ball(int num){
         this.num=num;
@@ -18,6 +21,6 @@ public class Ball {
     }
     @Override
     public  String toString(){
-        return num+"";
+        return "("+num+","+position+")";
     }
 }

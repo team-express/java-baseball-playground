@@ -1,5 +1,5 @@
 package baseball;
 
 public enum BallState {
-    BALL, STRIKE;
+    BALL, STRIKE, NOTHING;
 }
