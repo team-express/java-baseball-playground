@@ -46,7 +46,7 @@ public class BallGame {
             flag = scanner.nextInt()==1;
             computerBalls = ballMaker.createComputerBalls();
         }
-        
+
         return flag;
     }
 }
