@@ -7,6 +7,7 @@ public class BaseballNumbers {
     public List<Integer> makeNumbers() {
 
         MakeRandomNumber makeRandomNumber = new MakeRandomNumber();
+        Util util = new Util();
 
         boolean result = true;
 
@@ -14,25 +15,11 @@ public class BaseballNumbers {
 
         while (result) {
             int number = makeRandomNumber.make();
-            numbers = addNumber(numbers, number);
-            result = listSizeUnderThree(numbers);
+            numbers = util.addNumber(numbers, number);
+            result = util.listSizeUnderThree(numbers);
         }
 
         return numbers;
     }
 
-    public boolean listSizeUnderThree(List<Integer> numbers) {
-        return numbers.size() != 3;
-    }
-
-    public List<Integer> addNumber(List<Integer> numbers, int number) {
-        checkDuplicate(numbers, number);
-        return numbers;
-    }
-
-    private void checkDuplicate(List<Integer> numbers, int number) {
-        if (!numbers.contains(number)) {
-            numbers.add(number);
-        }
-    }
 }
