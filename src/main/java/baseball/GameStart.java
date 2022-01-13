@@ -1,8 +1,6 @@
 package baseball;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GameStart {
 
@@ -10,40 +8,38 @@ public class GameStart {
         BaseballNumbers baseballNumbers = new BaseballNumbers();
         List<Integer> computer = baseballNumbers.makeNumbers();
 
-        Game game = new Game();
-        while (true) {
-            List<Integer> player = playerNumbers();
+        PlayerBalls playerBalls = new PlayerBalls();
+        GameResult gameResult = new GameResult();
+
+        boolean result3Strike = true;
+
+        while (result3Strike) {
+            List<Integer> player = playerBalls.playerNumbers();
+
             System.out.println(computer);
-           String result = game.getResult(computer, player);
+
+            String result = gameResult.getResult(computer, player);
             System.out.println(result);
-            if (result.equals("3스트라이크")) {
-                System.out.println("정답입니다.");
-                break;
-            }
+
+            result3Strike = isResult3Strike(result);
+
             System.out.println("틀렸습니다.");
         }
     }
 
-    public List<Integer> playerNumbers() {
-        System.out.print("숫자를 입력해주세요 : ");
+    private boolean isResult3Strike(String result) {
 
-        List<Integer> player = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        Util util = new Util();
+        boolean gameResult = true;
 
-        while (util.listSizeUnderThree(player)) {
-            int number = scanner.nextInt();
-
-            boolean check = util.checkDuplicate(player, number);
-            if (!check) {
-                System.out.println("중복된 숫자가 있습니다. 다시 입력해주세요.");
-            }
-            if (check) {
-                util.addNumber(player, number);
-            }
+        if (result.equals("3스트라이크")) {
+            System.out.println("정답입니다.");
+            gameResult = false;
         }
-
-        return player;
+        return gameResult;
     }
+
+
+
+
 
 }
