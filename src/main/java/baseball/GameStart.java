@@ -1,10 +1,19 @@
 package baseball;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class GameStart {
-
     public void game() {
+
+        boolean gameChoice = true;
+        while (gameChoice) {
+            firstGame();
+            gameChoice = isGameResult();
+        }
+    }
+
+    public void firstGame() {
         BaseballNumbers baseballNumbers = new BaseballNumbers();
         List<Integer> computer = baseballNumbers.makeNumbers();
 
@@ -23,7 +32,6 @@ public class GameStart {
 
             result3Strike = isResult3Strike(result);
 
-            System.out.println("틀렸습니다.");
         }
     }
 
@@ -38,8 +46,17 @@ public class GameStart {
         return gameResult;
     }
 
+    private boolean isGameResult() {
+        boolean playerChoice = true;
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        Scanner scanner = new Scanner(System.in);
+        int restart = scanner.nextInt();
 
-
-
-
+        if (restart == 2) {
+            playerChoice = false;
+            return playerChoice;
+        }
+        return playerChoice;
+    }
 }
+
