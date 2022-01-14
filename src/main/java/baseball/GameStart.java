@@ -25,7 +25,7 @@ public class GameStart {
         while (result3Strike) {
             List<Integer> player = playerBalls.playerNumbers();
 
-            System.out.println(computer);
+            System.out.println("정답: " + computer);
 
             String result = gameResult.getResult(computer, player);
             System.out.println(result);
@@ -47,7 +47,9 @@ public class GameStart {
     }
 
     private boolean isGameResult() {
+
         boolean playerChoice = true;
+
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         Scanner scanner = new Scanner(System.in);
         int restart = scanner.nextInt();

@@ -9,9 +9,7 @@ public class PlayerBalls {
     public List<Integer> playerNumbers() {
 
         System.out.print("숫자를 입력해주세요 : ");
-
         List<Integer> player = new ArrayList<>();
-
         insertPlayerNumber(player);
 
         return player;
@@ -23,6 +21,7 @@ public class PlayerBalls {
 
         while (util.listSizeUnderThree(player)) {
             checkPlayerNumber(player, util);
+            checkPlayerNumberSize(player);
         }
     }
 
@@ -34,27 +33,21 @@ public class PlayerBalls {
         String[] numbers = numberStr.split("");
 
         for (String str : numbers) {
-
             int number = Integer.parseInt(str);
+            player = util.addNumber(player, number);
+        }
 
-            boolean check = util.checkDuplicate(player, number);
+    }
 
-            if (!check) {
-                player.clear();
-                System.out.println("중복된 숫자가 있습니다. 다시 입력해주세요.");
-                System.out.print("숫자를 입력해주세요: ");
-                break;
-            }
+    private void checkPlayerNumberSize(List<Integer> player) {
 
-            if (player.size() > 3) {
-                player.clear();
-                System.out.println("세자리가 넘었습니다. 다시 입력해주세요.");
-                System.out.print("숫자를 입력해주세요: ");
-                break;
-            }
+        boolean checkSize = player.size() != 3;
+        String message = "잘못된 숫자입니다.";
 
-            util.addNumber(player, number);
-
+        if (checkSize) {
+            player.clear();
+            System.out.println(message);
+            System.out.print("숫자를 입력해주세요: ");
         }
     }
 }
