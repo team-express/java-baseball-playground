@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
-public class Ball {
+public class Ball {//
     private int num;
     @Setter private int position;
 
