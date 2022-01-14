@@ -83,7 +83,7 @@ public class BallMaker {
         List<Integer> list = new ArrayList<>();
         List<Ball> balls = new ArrayList<>();
 
-        while(balls.size()<3) {
+        while(balls.size()<DIGIT_NUM) {
             Ball ball = createComputerBall(list);
             balls.add(ball);
             list.add(ball.getNum());
@@ -92,10 +92,10 @@ public class BallMaker {
     }
 
     private Ball createComputerBall(List<Integer> list){
-        int num = (int) (Math.random() * 9) + 1;
+        int num = (int) (Math.random() * MAX_NUM) + MIN_NUM;
 
         while(checkDuplicatedOfOneNum(num, list)){
-            num = (int) (Math.random() * 9) + 1;
+            num = (int) (Math.random() * MAX_NUM) + MIN_NUM;
         }
 
         return new Ball(num);
